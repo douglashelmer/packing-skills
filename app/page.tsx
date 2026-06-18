@@ -17,6 +17,79 @@ import {
 const CHECKOUT =
   "https://pay.hotmart.com/Y106393670A?off=bxk9fmp2&checkoutMode=10";
 
+function AddonBox() {
+  const features = [
+    "Prompt em texto → imagem gerada",
+    "Travar produto na cena",
+    "Manter câmera e iluminação",
+    "Gerar variações em lote",
+  ];
+  return (
+    <div className="relative select-none" style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.9))" }}>
+      {/* depth layers */}
+      <div className="absolute inset-0 translate-x-4 translate-y-4 rounded-2xl bg-lime/8" />
+      <div className="absolute inset-0 translate-x-2 translate-y-2 rounded-2xl bg-lime/12" />
+
+      {/* main face */}
+      <div className="relative bg-gradient-to-br from-[#0e1a09] to-[#080c04] rounded-2xl overflow-hidden" style={{ width: 280 }}>
+        {/* decorative lime waves */}
+        <svg
+          className="absolute right-0 top-0 h-full w-40 opacity-20 pointer-events-none"
+          viewBox="0 0 160 400"
+          preserveAspectRatio="xMaxYMid slice"
+        >
+          <path d="M140,0 C60,80 140,160 60,240 C-20,320 140,400 140,400" stroke="#b6d432" strokeWidth="3" fill="none" />
+          <path d="M110,0 C30,80 110,160 30,240 C-50,320 110,400 110,400" stroke="#b6d432" strokeWidth="2" fill="none" opacity="0.6" />
+          <path d="M160,30 C80,110 160,190 80,270 C0,350 80,400 40,400" stroke="#b6d432" strokeWidth="1.5" fill="none" opacity="0.3" />
+        </svg>
+
+        {/* spine text */}
+        <div className="absolute left-4 top-0 bottom-0 flex items-center justify-center pointer-events-none">
+          <span
+            className="text-dimmer text-[8px] font-black uppercase tracking-[0.4em] whitespace-nowrap"
+            style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+          >
+            nexIA Image · doug Academy
+          </span>
+        </div>
+
+        <div className="pl-10 pr-6 pt-7 pb-0">
+          <span className="inline-block border border-lime/30 text-lime text-[9px] font-black uppercase tracking-[0.15em] px-3 py-1 rounded-full mb-5">
+            ADDON · BLENDER
+          </span>
+
+          <div className="mb-4">
+            <div className="font-display font-black text-5xl leading-none text-foreground">
+              nex<span className="text-lime">IA</span>
+            </div>
+            <div className="font-display font-black text-5xl leading-none text-lime">
+              Image
+            </div>
+          </div>
+
+          <p className="text-dimmer text-[10px] font-semibold uppercase tracking-widest mb-5">
+            Geração com IA · Alta qualidade · 2.5K
+          </p>
+
+          <div className="space-y-2 mb-7">
+            {features.map((f) => (
+              <div key={f} className="flex gap-2 items-start">
+                <span className="text-lime text-sm leading-none mt-0.5">·</span>
+                <span className="text-muted text-xs leading-snug">{f}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-lime/10 border-t border-lime/20 px-10 py-3 flex items-center justify-between">
+          <span className="text-lime text-xs font-bold tabular-nums">v2.5.1</span>
+          <span className="text-dimmer text-xs">Blender 4.0+</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Btn({
   href,
   size = "lg",
@@ -164,8 +237,8 @@ export default function Home() {
         <section className="relative min-h-screen flex flex-col justify-center pt-16 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image
-              src="/hero.jpg"
-              alt="Produtos 3D renderizados com IA — Packing Skills IAPRO.BLEND"
+              src="/blender-screen.png"
+              alt="Blender + nexIA — modelos 3D e render final com IA"
               fill
               className="object-cover object-center opacity-25"
               priority
@@ -297,15 +370,15 @@ export default function Home() {
               <FadeIn delay={0.1}>
                 <div className="relative rounded-2xl overflow-hidden card-border">
                   <Image
-                    src="/produto.png"
-                    alt="Produto Velune HELMER renderizado com Blender e IA"
+                    src="/resultado.png"
+                    alt="4 frascos Velune HELMER renderizados com nexIA Image — resultado real do curso"
                     width={600}
-                    height={600}
+                    height={900}
                     className="w-full object-cover"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent px-5 py-5">
                     <p className="text-muted text-sm">
-                      Resultado real do método.{" "}
+                      Resultado real gerado pelo addon nexIA.{" "}
                       <span className="text-foreground font-semibold">
                         Produto Velune — HELMER.
                       </span>
@@ -442,39 +515,79 @@ export default function Home() {
         {/* BONUS NEXIA */}
         <section className="section-alt py-24 md:py-32">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="grid md:grid-cols-2 gap-14 items-center">
-              <FadeIn delay={0.1}>
-                <div className="rounded-2xl overflow-hidden card-border">
-                  <Image
-                    src="/nexia.jpg"
-                    alt="Addon nexIA Image gerando composição de produto no Blender"
-                    width={700}
-                    height={700}
-                    className="w-full object-cover"
-                  />
-                </div>
+            <FadeIn>
+              <div className="text-center mb-16">
+                <span className="inline-block bg-lime text-background text-xs font-black uppercase tracking-widest px-4 py-2 rounded-full mb-4">
+                  🎁 Bônus incluído
+                </span>
+                <h2 className="font-display font-black text-4xl sm:text-5xl md:text-6xl leading-none">
+                  Addon nexIA Image — grátis com o curso.
+                </h2>
+              </div>
+            </FadeIn>
+
+            {/* Box + panel layout */}
+            <div className="grid md:grid-cols-2 gap-14 items-center mb-16">
+              <FadeIn className="flex justify-center md:justify-end">
+                <AddonBox />
               </FadeIn>
-              <FadeIn>
+              <FadeIn delay={0.1}>
                 <div>
-                  <span className="inline-block bg-lime text-background text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
-                    🎁 Bônus incluído
-                  </span>
-                  <h2 className="font-display font-black text-4xl sm:text-5xl leading-none mb-6">
-                    Addon nexIA Image — grátis com o curso.
-                  </h2>
                   <p className="text-muted text-lg leading-relaxed mb-6">
-                    O addon que instala direto no Blender e usa IA para gerar
-                    imagens de produto com ambientes, fundos e iluminação
-                    gerados por texto. Você escreve o que quer — e a IA
-                    entrega.
+                    O addon instala direto no Blender — sem API key, sem conta externa. Você usa a conta Gemini do Google pra gerar as imagens. Escreve o que quer em texto e a IA entrega o fundo, a luz e a atmosfera certa pro produto.
                   </p>
+                  <ul className="space-y-3 mb-6">
+                    {[
+                      "Prompt em português — descreva a cena e a IA gera",
+                      "Trava o produto no lugar enquanto só o fundo muda",
+                      "Mantém câmera e iluminação entre gerações",
+                      "Gera variações de ângulo em lote com 1 clique",
+                      "Resolução nativa até 2.5K — pronto pra anúncio",
+                    ].map((f, i) => (
+                      <li key={i} className="flex gap-3 text-muted text-base">
+                        <Check className="w-5 h-5 text-lime shrink-0 mt-0.5" aria-hidden="true" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
                   <p className="text-foreground text-lg font-semibold">
-                    Normalmente vendido separado. Aqui vem incluído no Packing
-                    Skills.
+                    Normalmente vendido separado. Aqui vem incluído no Packing Skills.
                   </p>
                 </div>
               </FadeIn>
             </div>
+
+            {/* Panel screenshot */}
+            <FadeIn delay={0.15}>
+              <div className="grid md:grid-cols-2 gap-8 items-center bg-card card-border rounded-2xl p-8">
+                <div>
+                  <h3 className="font-display font-black text-2xl sm:text-3xl mb-4">
+                    O painel que você vai usar no Blender.
+                  </h3>
+                  <p className="text-muted text-base leading-relaxed mb-4">
+                    Depois de modelar e texturizar o frasco, você abre o painel do nexIA, digita a descrição da cena — e clica em Render. Em segundos você tem a imagem de produto finalizada.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["Travar Produto", "Manter Câmera", "Manter Iluminação", "Gerar Variações"].map((tag) => (
+                      <span key={tag} className="text-xs font-semibold text-lime border border-lime/25 rounded-full px-3 py-1">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex justify-center">
+                  <div className="rounded-xl overflow-hidden card-border max-w-xs w-full">
+                    <Image
+                      src="/addon-panel.png"
+                      alt="Painel nexIA v2.5.1 no Blender — Travar Produto, Manter Câmera, Render"
+                      width={380}
+                      height={700}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
           </div>
         </section>
 
