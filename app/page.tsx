@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import {
   Check,
   X,
@@ -135,6 +135,70 @@ function FadeIn({
     >
       {children}
     </motion.div>
+  );
+}
+
+function Card3D({ img, label }: { img: string; label: string }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [12, -12]), {
+    stiffness: 300,
+    damping: 30,
+  });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-12, 12]), {
+    stiffness: 300,
+    damping: 30,
+  });
+  const glowX = useTransform(x, [-0.5, 0.5], ["0%", "100%"]);
+  const glowY = useTransform(y, [-0.5, 0.5], ["0%", "100%"]);
+
+  function onMove(e: React.MouseEvent<HTMLDivElement>) {
+    const r = e.currentTarget.getBoundingClientRect();
+    x.set((e.clientX - r.left) / r.width - 0.5);
+    y.set((e.clientY - r.top) / r.height - 0.5);
+  }
+  function onLeave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  return (
+    <div
+      className="cursor-pointer"
+      style={{ perspective: "700px" }}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+    >
+      <motion.div
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        className="relative rounded-xl overflow-hidden card-border shadow-2xl"
+      >
+        <Image
+          src={img}
+          alt={label}
+          width={400}
+          height={700}
+          className="w-full h-auto block"
+        />
+        {/* Dynamic shine */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none rounded-xl"
+          style={{
+            background: useTransform(
+              [glowX, glowY],
+              ([gx, gy]) =>
+                `radial-gradient(circle at ${gx} ${gy}, rgba(182,212,50,0.18) 0%, transparent 65%)`
+            ),
+          }}
+        />
+        {/* Label bar */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-4 py-4">
+          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-lime">
+            {label}
+          </span>
+        </div>
+      </motion.div>
+    </div>
   );
 }
 
@@ -476,15 +540,7 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-14">
               {modules.map((m, i) => (
                 <FadeIn key={i} delay={i * 0.07}>
-                  <div className="rounded-xl overflow-hidden card-border group">
-                    <Image
-                      src={m.img}
-                      alt={m.label}
-                      width={400}
-                      height={700}
-                      className="w-full h-auto object-cover group-hover:scale-[1.03] transition-transform duration-300"
-                    />
-                  </div>
+                  <Card3D img={m.img} label={m.label} />
                 </FadeIn>
               ))}
             </div>
@@ -831,21 +887,6 @@ export default function Home() {
         </footer>
       </main>
 
-      {/* STICKY MOBILE CTA */}
-      <div
-        className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur-xl border-t border-lime/15 px-4 pt-3"
-        style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
-      >
-        <a
-          href={CHECKOUT}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-between gap-2 w-full bg-lime text-background font-black uppercase tracking-wide rounded-xl px-6 py-4 text-base focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-lime/40"
-        >
-          <span>Quero aprender agora</span>
-          <span className="tabular-nums">R$ 47</span>
-        </a>
-      </div>
     </>
   );
 }
