@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  /* Background hierarchy */
+  --color-background: #080c04;
+  --color-surface: #0c110a;
+  --color-card: #121b0c;
+
+  /* Text hierarchy */
+  --color-foreground: #e8e4d4;
+  --color-muted: #9a9680;
+  --color-dimmer: #5a5750;
+
+  /* Accent */
+  --color-lime: #b6d432;
+  --color-lime-dark: #95ad27;
+
+  /* Fonts */
+  --font-display: var(--font-barlow), "Barlow Condensed", system-ui, sans-serif;
+  --font-sans: var(--font-inter), Inter, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+  body {
+    background-color: #080c04;
+    color: #e8e4d4;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #b6d432, #dff770);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .accent-glow {
+    box-shadow:
+      0 0 60px -10px rgba(182, 212, 50, 0.4),
+      0 0 120px -30px rgba(182, 212, 50, 0.15);
+  }
+  .card-border {
+    border: 1px solid rgba(182, 212, 50, 0.12);
+  }
+  .section-alt {
+    background-color: #0c110a;
+  }
+}
