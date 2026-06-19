@@ -298,77 +298,180 @@ export default function Home() {
         </nav>
 
         {/* HERO */}
-        <section className="relative min-h-screen flex flex-col justify-center pt-16 overflow-hidden">
+        <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
+          {/* BG layers */}
           <div className="absolute inset-0 z-0">
             <Image
               src="/blender-screen.png"
-              alt="Blender + nexIA — modelos 3D e render final com IA"
+              alt=""
               fill
-              className="object-cover object-center opacity-25"
+              className="object-cover object-center opacity-[0.18]"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background" />
+            {/* directional gradient: opaque left, transparent right */}
+            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/20" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-transparent to-background" />
+            {/* tech grid */}
+            <div
+              className="absolute inset-0 opacity-[0.03]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(#b6d432 1px,transparent 1px),linear-gradient(90deg,#b6d432 1px,transparent 1px)",
+                backgroundSize: "64px 64px",
+              }}
+            />
+            {/* ambient lime orb — right side */}
+            <div className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-lime/[0.06] blur-[140px] pointer-events-none" />
           </div>
 
-          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-28">
-            <FadeIn>
-              <span className="inline-block bg-lime/10 border border-lime/25 text-lime text-xs font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full mb-6">
-                {"{FORMAÇÃO}"} · IAPRO.BLEND · Packing Skills
-              </span>
-            </FadeIn>
+          <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-20">
+            <div className="grid lg:grid-cols-[1fr_460px] gap-6 lg:gap-14 items-center">
 
-            <FadeIn delay={0.08}>
-              <h1 className="font-display font-black text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] leading-none mb-6 text-balance">
-                Seu primeiro projeto com{" "}
-                <span className="text-gradient">3D + IA</span>{" "}
-                em menos de 1 hora.
-              </h1>
-            </FadeIn>
-
-            <FadeIn delay={0.14}>
-              <p className="text-muted text-xl md:text-2xl max-w-3xl mb-10 leading-relaxed">
-                Você modela o frasco, aplica o rótulo, configura os materiais e
-                gera a cena com IA — e sai com uma imagem de produto que parece
-                saída de estúdio profissional.{" "}
-                <span className="text-foreground font-semibold">
-                  Do zero. Em menos de 60 minutos.
-                </span>
-              </p>
-            </FadeIn>
-
-            <FadeIn delay={0.2}>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-8">
-                <Btn href={CHECKOUT}>Sim, quero aprender agora →</Btn>
-                <div>
-                  <span className="text-foreground font-black text-3xl tabular-nums">
-                    R$ 47
+              {/* ── LEFT: Copy ── */}
+              <div className="order-2 lg:order-1">
+                <FadeIn>
+                  <span className="inline-flex items-center gap-2 bg-lime/10 border border-lime/25 text-lime text-xs font-black uppercase tracking-[0.18em] px-4 py-2 rounded-full mb-6">
+                    <span className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
+                    Packing Skills · IAPRO.BLEND
                   </span>
-                  <span className="text-muted text-sm ml-2">
-                    · acesso vitalício
-                  </span>
-                </div>
-              </div>
-            </FadeIn>
+                </FadeIn>
 
-            <FadeIn delay={0.26}>
-              <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
-                {[
-                  "Acesso vitalício",
-                  "Bônus: Addon nexIA Image",
-                  "Começa do zero",
-                  "Garantia 7 dias",
-                ].map((seal) => (
-                  <span key={seal} className="flex items-center gap-2">
-                    <Check
-                      className="w-4 h-4 text-lime"
-                      aria-hidden="true"
+                <FadeIn delay={0.07}>
+                  <h1 className="font-display font-black text-5xl sm:text-6xl md:text-7xl leading-[0.88] mb-6">
+                    Seu primeiro<br />
+                    projeto com{" "}
+                    <span className="text-gradient">3D&nbsp;+&nbsp;IA</span><br />
+                    em menos de<br />
+                    <span className="text-foreground">1 hora.</span>
+                  </h1>
+                </FadeIn>
+
+                {/* mobile result preview */}
+                <FadeIn delay={0.11} className="lg:hidden my-8 -mx-4 sm:mx-0">
+                  <div className="relative px-4 sm:px-0">
+                    <div className="absolute inset-0 bg-lime/10 blur-[70px] rounded-full" />
+                    <Image
+                      src="/resultado.png"
+                      alt="Resultado criado no curso — 4 frascos HELMER Velune"
+                      width={600}
+                      height={600}
+                      className="w-full max-w-xs sm:max-w-sm mx-auto h-auto relative z-10 drop-shadow-2xl"
                     />
-                    {seal}
-                  </span>
-                ))}
+                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20">
+                      <span className="bg-black/70 backdrop-blur-md border border-lime/20 text-lime text-[9px] font-black uppercase tracking-[0.15em] px-3 py-1.5 rounded-full whitespace-nowrap">
+                        ← criado no curso com Blender + nexIA
+                      </span>
+                    </div>
+                  </div>
+                </FadeIn>
+
+                <FadeIn delay={0.13}>
+                  <p className="text-muted text-lg md:text-xl max-w-lg mb-10 leading-relaxed">
+                    Você modela o frasco, aplica o rótulo, configura os materiais
+                    e gera a cena com IA — e sai com uma imagem de produto que
+                    parece saída de estúdio.{" "}
+                    <strong className="text-foreground font-semibold">
+                      Do zero. Em 60 minutos.
+                    </strong>
+                  </p>
+                </FadeIn>
+
+                <FadeIn delay={0.2}>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-8">
+                    <Btn href={CHECKOUT}>Sim, quero aprender agora →</Btn>
+                    <div>
+                      <span className="text-foreground font-black text-3xl tabular-nums">
+                        R$ 47
+                      </span>
+                      <span className="text-muted text-sm ml-2">
+                        · acesso vitalício
+                      </span>
+                    </div>
+                  </div>
+                </FadeIn>
+
+                <FadeIn delay={0.26}>
+                  <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
+                    {[
+                      "Acesso vitalício",
+                      "Bônus: Addon nexIA Image",
+                      "Começa do zero",
+                      "Garantia 7 dias",
+                    ].map((seal) => (
+                      <span key={seal} className="flex items-center gap-2">
+                        <Check className="w-4 h-4 text-lime" aria-hidden="true" />
+                        {seal}
+                      </span>
+                    ))}
+                  </div>
+                </FadeIn>
               </div>
-            </FadeIn>
+
+              {/* ── RIGHT: Product showcase (desktop only) ── */}
+              <div className="order-1 lg:order-2 hidden lg:flex items-center justify-center">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.86, y: 40 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{
+                    duration: 1.1,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: 0.25,
+                  }}
+                  className="relative w-full"
+                >
+                  {/* glow halo */}
+                  <div className="absolute inset-[-15%] bg-lime/[0.12] blur-[90px] rounded-full pointer-events-none" />
+
+                  {/* floating wrapper */}
+                  <motion.div
+                    animate={{ y: [0, -16, 0] }}
+                    transition={{
+                      duration: 5.5,
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      delay: 1.4,
+                    }}
+                    className="relative z-10"
+                  >
+                    {/* badge top */}
+                    <div className="absolute top-3 left-3 z-20">
+                      <span className="inline-flex items-center gap-1.5 bg-black/65 backdrop-blur-md border border-lime/25 text-lime text-[9px] font-black uppercase tracking-[0.15em] px-3 py-1.5 rounded-full">
+                        <span className="w-1.5 h-1.5 rounded-full bg-lime" />
+                        criado no curso
+                      </span>
+                    </div>
+
+                    <Image
+                      src="/resultado.png"
+                      alt="4 frascos HELMER Velune — renderizados com Blender e nexIA Image"
+                      width={600}
+                      height={600}
+                      className="w-full h-auto rounded-2xl shadow-2xl"
+                      priority
+                    />
+
+                    {/* badge bottom */}
+                    <div className="absolute bottom-3 left-0 right-0 z-20 flex justify-center">
+                      <span className="bg-black/65 backdrop-blur-md border border-white/10 text-muted text-[9px] font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full">
+                        Blender + nexIA Image · 2.5K
+                      </span>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              </div>
+
+            </div>
           </div>
+
+          {/* scroll hint */}
+          <motion.div
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-dimmer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, y: [0, 6, 0] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 2 }}
+          >
+            <ChevronDown className="w-6 h-6" />
+          </motion.div>
         </section>
 
         {/* PROBLEM */}
