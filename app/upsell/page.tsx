@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
+import VideoUpsell from "./VideoUpsell";
 
 export const metadata: Metadata = {
   title: "Sua compra não está completa — IAPRO.BLEND",
   robots: { index: false, follow: false },
+  other: {
+    "preload-player": "https://scripts.converteai.net/cf533d56-a2aa-46c6-aec0-00c4e82a7d9f/players/6a35530ddb03e03773ce1200/v4/player.js",
+  },
 };
 
 const UPSELL_CHECKOUT = "#"; // TODO: substituir pelo link do checkout do IAPRO R$297
@@ -44,12 +48,7 @@ export default function UpsellPage() {
 
       {/* Player */}
       <div className="w-full max-w-3xl mb-10">
-        <div className="relative w-full rounded-2xl overflow-hidden border border-white/10 bg-black">
-          {/* Cole aqui o embed do VTurb */}
-          <div className="aspect-video flex items-center justify-center bg-[#0c110a] text-[#5a5750] text-sm">
-            [ Cole aqui o embed do vídeo ]
-          </div>
-        </div>
+        <VideoUpsell />
       </div>
 
       {/* Oferta abaixo do vídeo */}

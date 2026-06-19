@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import VideoUpsell from "./VideoUpsell";
 
 export const metadata: Metadata = {
   title: "Oferta especial — IAPRO.BLEND",
@@ -43,12 +44,7 @@ export default function WppPage() {
 
       {/* Player */}
       <div className="w-full max-w-3xl mb-10">
-        <div className="relative w-full rounded-2xl overflow-hidden border border-white/10 bg-black">
-          {/* Cole aqui o embed do VTurb */}
-          <div className="aspect-video flex items-center justify-center bg-[#0c110a] text-[#5a5750] text-sm">
-            [ Cole aqui o embed do vídeo ]
-          </div>
-        </div>
+        <VideoUpsell />
       </div>
 
       {/* Oferta */}
