@@ -298,9 +298,38 @@ export default function Home() {
         </nav>
 
         {/* HERO */}
-        <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
-          {/* BG layers */}
-          <div className="absolute inset-0 z-0">
+        <section className="relative overflow-hidden">
+
+          {/* ── MOBILE ONLY: full-bleed product image at top ── */}
+          <motion.div
+            className="lg:hidden relative w-full mt-16"
+            style={{ height: "clamp(260px, 85vw, 460px)" }}
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Image
+              src="/resultado.png"
+              alt="4 frascos HELMER Velune criados no curso com Blender + nexIA"
+              fill
+              className="object-cover object-center"
+              priority
+            />
+            {/* top fade: nav stays legible */}
+            <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background via-background/60 to-transparent" />
+            {/* bottom fade: blends into dark bg */}
+            <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-background to-transparent" />
+            {/* badge */}
+            <div className="absolute bottom-5 left-4 z-10">
+              <span className="inline-flex items-center gap-1.5 bg-black/70 backdrop-blur-md border border-lime/30 text-lime text-[9px] font-black uppercase tracking-[0.15em] px-3 py-1.5 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-lime" />
+                Resultado do curso — Blender + nexIA
+              </span>
+            </div>
+          </motion.div>
+
+          {/* ── DESKTOP ONLY: background layers ── */}
+          <div className="hidden lg:block absolute inset-0 z-0">
             <Image
               src="/blender-screen.png"
               alt=""
@@ -308,10 +337,8 @@ export default function Home() {
               className="object-cover object-center opacity-[0.18]"
               priority
             />
-            {/* directional gradient: opaque left, transparent right */}
             <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/20" />
             <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-transparent to-background" />
-            {/* tech grid */}
             <div
               className="absolute inset-0 opacity-[0.03]"
               style={{
@@ -320,24 +347,24 @@ export default function Home() {
                 backgroundSize: "64px 64px",
               }}
             />
-            {/* ambient lime orb — right side */}
             <div className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-lime/[0.06] blur-[140px] pointer-events-none" />
           </div>
 
-          <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-20">
-            <div className="grid lg:grid-cols-[1fr_460px] gap-6 lg:gap-14 items-center">
+          {/* ── CONTENT ── */}
+          <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pb-12 lg:min-h-screen lg:flex lg:items-center lg:pt-28 lg:pb-20">
+            <div className="w-full grid lg:grid-cols-[1fr_460px] gap-6 lg:gap-14 items-center">
 
-              {/* ── LEFT: Copy ── */}
-              <div className="order-2 lg:order-1">
+              {/* LEFT: copy */}
+              <div className="pt-4 lg:pt-0">
                 <FadeIn>
-                  <span className="inline-flex items-center gap-2 bg-lime/10 border border-lime/25 text-lime text-xs font-black uppercase tracking-[0.18em] px-4 py-2 rounded-full mb-6">
+                  <span className="inline-flex items-center gap-2 bg-lime/10 border border-lime/25 text-lime text-xs font-black uppercase tracking-[0.18em] px-4 py-2 rounded-full mb-5">
                     <span className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
                     Packing Skills · IAPRO.BLEND
                   </span>
                 </FadeIn>
 
                 <FadeIn delay={0.07}>
-                  <h1 className="font-display font-black text-5xl sm:text-6xl md:text-7xl leading-[0.88] mb-6">
+                  <h1 className="font-display font-black text-[clamp(2.8rem,12vw,5.5rem)] sm:text-6xl md:text-7xl leading-[0.88] mb-5">
                     Seu primeiro<br />
                     projeto com{" "}
                     <span className="text-gradient">3D&nbsp;+&nbsp;IA</span><br />
@@ -346,29 +373,10 @@ export default function Home() {
                   </h1>
                 </FadeIn>
 
-                {/* mobile result preview */}
-                <FadeIn delay={0.11} className="lg:hidden my-8 -mx-4 sm:mx-0">
-                  <div className="relative px-4 sm:px-0">
-                    <div className="absolute inset-0 bg-lime/10 blur-[70px] rounded-full" />
-                    <Image
-                      src="/resultado.png"
-                      alt="Resultado criado no curso — 4 frascos HELMER Velune"
-                      width={600}
-                      height={600}
-                      className="w-full max-w-xs sm:max-w-sm mx-auto h-auto relative z-10 drop-shadow-2xl"
-                    />
-                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20">
-                      <span className="bg-black/70 backdrop-blur-md border border-lime/20 text-lime text-[9px] font-black uppercase tracking-[0.15em] px-3 py-1.5 rounded-full whitespace-nowrap">
-                        ← criado no curso com Blender + nexIA
-                      </span>
-                    </div>
-                  </div>
-                </FadeIn>
-
                 <FadeIn delay={0.13}>
-                  <p className="text-muted text-lg md:text-xl max-w-lg mb-10 leading-relaxed">
-                    Você modela o frasco, aplica o rótulo, configura os materiais
-                    e gera a cena com IA — e sai com uma imagem de produto que
+                  <p className="text-muted text-base sm:text-lg md:text-xl max-w-lg mb-7 leading-relaxed">
+                    Você modela o frasco, aplica o rótulo, configura materiais
+                    e gera a cena com IA — e sai com imagem de produto que
                     parece saída de estúdio.{" "}
                     <strong className="text-foreground font-semibold">
                       Do zero. Em 60 minutos.
@@ -376,71 +384,85 @@ export default function Home() {
                   </p>
                 </FadeIn>
 
-                <FadeIn delay={0.2}>
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-8">
-                    <Btn href={CHECKOUT}>Sim, quero aprender agora →</Btn>
-                    <div>
-                      <span className="text-foreground font-black text-3xl tabular-nums">
-                        R$ 47
-                      </span>
-                      <span className="text-muted text-sm ml-2">
-                        · acesso vitalício
-                      </span>
-                    </div>
+                <FadeIn delay={0.19}>
+                  <a
+                    href={CHECKOUT}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex sm:inline-flex items-center justify-center gap-3 bg-lime text-background font-black uppercase tracking-wide rounded-xl px-8 py-5 text-xl transition-all duration-200 hover:bg-lime-dark hover:scale-[1.02] active:scale-95 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-lime/40 mb-5"
+                  >
+                    Sim, quero aprender agora →
+                  </a>
+                </FadeIn>
+
+                <FadeIn delay={0.24}>
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-foreground font-black text-3xl tabular-nums">R$ 47</span>
+                    <span className="text-dimmer text-sm">·</span>
+                    <span className="text-muted text-sm">acesso vitalício</span>
+                    <span className="text-dimmer text-sm">·</span>
+                    <span className="text-muted text-sm">3x de R$ 16,91</span>
                   </div>
                 </FadeIn>
 
-                <FadeIn delay={0.26}>
-                  <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
+                <FadeIn delay={0.28}>
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-muted mb-8 sm:flex sm:flex-wrap sm:gap-x-6">
                     {[
                       "Acesso vitalício",
                       "Bônus: Addon nexIA Image",
-                      "Começa do zero",
+                      "Bônus: Blender Basics",
                       "Garantia 7 dias",
                     ].map((seal) => (
                       <span key={seal} className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-lime" aria-hidden="true" />
+                        <Check className="w-4 h-4 text-lime shrink-0" aria-hidden="true" />
                         {seal}
                       </span>
                     ))}
                   </div>
                 </FadeIn>
+
+                {/* Stats bar */}
+                <FadeIn delay={0.33}>
+                  <div className="flex flex-wrap gap-x-7 gap-y-3 pt-5 border-t border-white/[0.06]">
+                    {[
+                      { n: "6", label: "Módulos" },
+                      { n: "≈60", label: "Minutos" },
+                      { n: "+2", label: "Bônus" },
+                      { n: "7", label: "Dias de garantia" },
+                    ].map((s) => (
+                      <div key={s.label} className="flex items-baseline gap-1.5">
+                        <span className="font-display font-black text-2xl text-lime leading-none">
+                          {s.n}
+                        </span>
+                        <span className="text-dimmer text-[11px] uppercase tracking-wider">
+                          {s.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </FadeIn>
               </div>
 
-              {/* ── RIGHT: Product showcase (desktop only) ── */}
-              <div className="order-1 lg:order-2 hidden lg:flex items-center justify-center">
+              {/* RIGHT: desktop showcase */}
+              <div className="hidden lg:flex items-center justify-center">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.86, y: 40 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{
-                    duration: 1.1,
-                    ease: [0.16, 1, 0.3, 1],
-                    delay: 0.25,
-                  }}
+                  transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
                   className="relative w-full"
                 >
-                  {/* glow halo */}
                   <div className="absolute inset-[-15%] bg-lime/[0.12] blur-[90px] rounded-full pointer-events-none" />
-
-                  {/* floating wrapper */}
                   <motion.div
                     animate={{ y: [0, -16, 0] }}
-                    transition={{
-                      duration: 5.5,
-                      ease: "easeInOut",
-                      repeat: Infinity,
-                      delay: 1.4,
-                    }}
+                    transition={{ duration: 5.5, ease: "easeInOut", repeat: Infinity, delay: 1.4 }}
                     className="relative z-10"
                   >
-                    {/* badge top */}
                     <div className="absolute top-3 left-3 z-20">
                       <span className="inline-flex items-center gap-1.5 bg-black/65 backdrop-blur-md border border-lime/25 text-lime text-[9px] font-black uppercase tracking-[0.15em] px-3 py-1.5 rounded-full">
                         <span className="w-1.5 h-1.5 rounded-full bg-lime" />
                         criado no curso
                       </span>
                     </div>
-
                     <Image
                       src="/resultado.png"
                       alt="4 frascos HELMER Velune — renderizados com Blender e nexIA Image"
@@ -449,8 +471,6 @@ export default function Home() {
                       className="w-full h-auto rounded-2xl shadow-2xl"
                       priority
                     />
-
-                    {/* badge bottom */}
                     <div className="absolute bottom-3 left-0 right-0 z-20 flex justify-center">
                       <span className="bg-black/65 backdrop-blur-md border border-white/10 text-muted text-[9px] font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full">
                         Blender + nexIA Image · 2.5K
@@ -463,9 +483,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* scroll hint */}
+          {/* scroll hint — desktop only */}
           <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-dimmer"
+            className="hidden lg:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-dimmer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, y: [0, 6, 0] }}
             transition={{ duration: 2, repeat: Infinity, delay: 2 }}
@@ -473,6 +493,29 @@ export default function Home() {
             <ChevronDown className="w-6 h-6" />
           </motion.div>
         </section>
+
+        {/* MARQUEE STRIP */}
+        <div className="overflow-hidden border-y border-lime/10 bg-lime/[0.025] py-3.5">
+          <div className="marquee-track flex whitespace-nowrap">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center gap-5 pr-10 text-[11px] font-black uppercase tracking-[0.2em] text-dimmer"
+              >
+                Packing Skills
+                <span className="text-lime text-base leading-none">✦</span>
+                3D + IA
+                <span className="text-lime text-base leading-none">✦</span>
+                Resultado Profissional
+                <span className="text-lime text-base leading-none">✦</span>
+                R$ 47
+                <span className="text-lime text-base leading-none">✦</span>
+                Acesso Vitalício
+                <span className="text-lime text-base leading-none">✦</span>
+              </span>
+            ))}
+          </div>
+        </div>
 
         {/* PROBLEM */}
         <section className="section-alt py-24 md:py-32">
@@ -750,6 +793,86 @@ export default function Home() {
           </div>
         </section>
 
+        {/* BONUS BLENDER BASICS */}
+        <section className="py-20 md:py-28">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <FadeIn>
+              <div className="relative overflow-hidden rounded-3xl border border-lime/15 bg-card p-8 sm:p-12 grid md:grid-cols-[1fr_auto] gap-8 items-center">
+                {/* lime orb bg */}
+                <div className="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-lime/[0.05] blur-[80px] pointer-events-none" />
+
+                <div className="relative z-10">
+                  <span className="inline-block bg-lime/10 border border-lime/25 text-lime text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full mb-5">
+                    🎁 Bônus #2 — Incluído
+                  </span>
+                  <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl leading-none mb-4">
+                    Curso Blender Basics —{" "}
+                    <span className="text-gradient">grátis.</span>
+                  </h2>
+                  <p className="text-muted text-lg leading-relaxed max-w-xl mb-6">
+                    Instalação, painéis, movimentação, modo de edição, modelagem básica, UV mapping e iluminação. Tudo que você precisa saber antes de começar o projeto — em menos de 2h, direto ao ponto.
+                  </p>
+                  <ul className="space-y-2.5 mb-8">
+                    {[
+                      "Instalação do Blender (gratuito) passo a passo",
+                      "Navegação e painéis — sem travar na interface",
+                      "Modo de edição e conceitos de modelagem",
+                      "UV Mapping básico — como aplicar texturas no modelo",
+                      "Iluminação e câmera — fundamentos que usará no projeto",
+                    ].map((f, i) => (
+                      <li key={i} className="flex gap-3 text-muted text-sm leading-snug">
+                        <Check className="w-4 h-4 text-lime shrink-0 mt-0.5" aria-hidden="true" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex items-center gap-4 flex-wrap">
+                    <div>
+                      <span className="text-dimmer text-sm line-through mr-2">R$ 197</span>
+                      <span className="text-lime font-black text-2xl">R$ 0</span>
+                      <span className="text-muted text-sm ml-1">— incluso no Packing Skills</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Visual aside */}
+                <div className="relative z-10 hidden md:flex flex-col items-center justify-center gap-3 min-w-[160px]">
+                  <div className="w-24 h-24 rounded-2xl bg-lime/10 border border-lime/20 flex items-center justify-center mb-2">
+                    <Layers className="w-10 h-10 text-lime" aria-hidden="true" />
+                  </div>
+                  <span className="text-center text-xs font-black uppercase tracking-widest text-dimmer">
+                    Blender<br />Basics
+                  </span>
+                  <span className="text-lime font-black text-lg">Grátis</span>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* MARQUEE 2 */}
+        <div className="overflow-hidden border-y border-lime/10 bg-lime/[0.025] py-3.5">
+          <div className="marquee-track flex whitespace-nowrap" style={{ animationDirection: "reverse" }}>
+            {Array.from({ length: 10 }).map((_, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center gap-5 pr-10 text-[11px] font-black uppercase tracking-[0.2em] text-dimmer"
+              >
+                Blender Basics
+                <span className="text-lime text-base leading-none">✦</span>
+                3D do Zero
+                <span className="text-lime text-base leading-none">✦</span>
+                UV Mapping
+                <span className="text-lime text-base leading-none">✦</span>
+                Iluminação
+                <span className="text-lime text-base leading-none">✦</span>
+                De R$ 197 por R$ 0
+                <span className="text-lime text-base leading-none">✦</span>
+              </span>
+            ))}
+          </div>
+        </div>
+
         {/* FOR WHOM */}
         <section className="py-24 md:py-32">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -875,9 +998,11 @@ export default function Home() {
                 <ul className="space-y-4 mb-10">
                   {[
                     "Módulo completo — Packing Skills (6 módulos)",
-                    "Addon nexIA Image — incluído como bônus",
+                    "🎁 Bônus #1: Addon nexIA Image (De R$ 97, por R$ 0)",
+                    "🎁 Bônus #2: Curso Blender Basics (De R$ 197, por R$ 0)",
                     "Arquivo do projeto .blend para referência",
                     "Acesso vitalício, sem mensalidade",
+                    "Garantia total de 7 dias — sem perguntas",
                   ].map((item, i) => (
                     <li key={i} className="flex gap-3 text-muted text-base">
                       <Check

@@ -33,6 +33,15 @@
   }
 }
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 22s linear infinite;
+  will-change: transform;
+}
+
 @layer utilities {
   .text-gradient {
     background: linear-gradient(135deg, #b6d432, #dff770);
