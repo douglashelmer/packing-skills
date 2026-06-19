@@ -1,0 +1,164 @@
+{
+  "name": "Packing Skills → WhatsApp Upsell",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "packing-skills-compra",
+        "responseMode": "immediately"
+      },
+      "id": "node-ps-webhook",
+      "name": "Webhook Packing Skills",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "packing-skills-compra-webhook-id"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body ?? $input.first().json;\n\n// Só processa PURCHASE_APPROVED (Compra aprovada)\nif (body.event !== 'PURCHASE_APPROVED') return [];\n\nconst buyer    = body.data?.buyer    ?? {};\nconst purchase = body.data?.purchase ?? {};\n\n// Normalizar telefone → somente dígitos, DDI 55\nlet phone = String(buyer.checkout_phone ?? '').replace(/\\D/g, '');\nif (!phone) return [];\nif (!phone.startsWith('55')) phone = '55' + phone;\n// Celular: 13 dígitos (55 + DDD 2 + 9 + número 8). Corrige 12 dígitos sem o 9.\nif (phone.length === 12) phone = phone.slice(0, 4) + '9' + phone.slice(4);\nif (phone.length !== 13) return []; // descarta fixo ou inválido\n\nreturn [{\n  json: {\n    name:        buyer.name ?? '',\n    firstName:   (buyer.name ?? '').split(' ')[0] || 'Aluno',\n    email:       (buyer.email ?? '').toLowerCase().trim(),\n    phone,\n    transaction: purchase.transaction ?? ''\n  }\n}];"
+      },
+      "id": "node-ps-code",
+      "name": "Normalizar Comprador",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT COUNT(*)::int AS count FROM iapro_buyers WHERE email = '{{ $json.email }}';",
+        "options": {}
+      },
+      "id": "node-ps-check",
+      "name": "Verificar IAPRO no Banco",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [680, 300],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "cond-tem-iapro",
+              "leftValue": "={{ Number($json.count) }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true
+      },
+      "id": "node-ps-if",
+      "name": "Já tem IAPRO?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [920, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://EVOLUTION_HOST/message/sendText/EVOLUTION_INSTANCE",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {"name": "apikey",       "value": "EVOLUTION_API_KEY"},
+            {"name": "Content-Type", "value": "application/json"}
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name":  "number",
+              "value": "={{ $('Normalizar Comprador').item.json.phone }}"
+            },
+            {
+              "name":  "text",
+              "value": "=Olá, {{ $('Normalizar Comprador').item.json.firstName }}! 🎉\n\nSua compra do *Packing Skills* foi confirmada!\n\nEm breve você vai receber o acesso completo no e-mail cadastrado.\n\nQualquer dúvida é só chamar aqui. 😊\n— Doug"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-ps-wpp-boasvindas",
+      "name": "WPP Boas-vindas (já tem IAPRO)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1160, 160]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://EVOLUTION_HOST/message/sendText/EVOLUTION_INSTANCE",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {"name": "apikey",       "value": "EVOLUTION_API_KEY"},
+            {"name": "Content-Type", "value": "application/json"}
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name":  "number",
+              "value": "={{ $('Normalizar Comprador').item.json.phone }}"
+            },
+            {
+              "name":  "text",
+              "value": "=Olá, {{ $('Normalizar Comprador').item.json.firstName }}! 🎉\n\nSua compra do *Packing Skills* foi confirmada!\n\nTenho uma surpresa especial reservada pra você — um bônus exclusivo que vai turbinar seus resultados com 3D + IA.\n\nAssista esse vídeo rápido antes de acessar o curso:\n👉 https://packing-skills.pages.dev/wpp\n\nAté já! 😊\n— Doug"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-ps-wpp-upsell",
+      "name": "WPP Upsell IAPRO",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1160, 440]
+    }
+  ],
+  "connections": {
+    "Webhook Packing Skills": {
+      "main": [[{"node": "Normalizar Comprador", "type": "main", "index": 0}]]
+    },
+    "Normalizar Comprador": {
+      "main": [[{"node": "Verificar IAPRO no Banco", "type": "main", "index": 0}]]
+    },
+    "Verificar IAPRO no Banco": {
+      "main": [[{"node": "Já tem IAPRO?", "type": "main", "index": 0}]]
+    },
+    "Já tem IAPRO?": {
+      "main": [
+        [{"node": "WPP Boas-vindas (já tem IAPRO)", "type": "main", "index": 0}],
+        [{"node": "WPP Upsell IAPRO",               "type": "main", "index": 0}]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {"executionOrder": "v1"},
+  "versionId": "ps-wpp-v1",
+  "meta": {"templateCredsSetupCompleted": false},
+  "id": "packing-skills-whatsapp",
+  "tags": []
+}

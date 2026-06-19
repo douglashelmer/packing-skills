@@ -16,7 +16,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const body = $input.first().json.body ?? $input.first().json;\n\n// Só processa PURCHASE_COMPLETE do produto IAPRO.BLEND (ID 6813981)\nif (body.event !== 'PURCHASE_COMPLETE') return [];\n\nconst buyer    = body.data?.buyer    ?? {};\nconst purchase = body.data?.purchase ?? {};\n\nif (Number(purchase?.product?.id) !== 6813981) return [];\nif (!buyer.email) return [];\n\nreturn [{\n  json: {\n    email:       buyer.email.toLowerCase().trim(),\n    name:        buyer.name ?? '',\n    transaction: purchase.transaction ?? ''\n  }\n}];"
+        "jsCode": "const body = $input.first().json.body ?? $input.first().json;\n\n// Só processa PURCHASE_APPROVED do produto IAPRO.BLEND (ID 6813981)\nif (body.event !== 'PURCHASE_APPROVED') return [];\n\nconst buyer    = body.data?.buyer    ?? {};\nconst purchase = body.data?.purchase ?? {};\n\nif (Number(purchase?.product?.id) !== 6813981) return [];\nif (!buyer.email) return [];\n\nreturn [{\n  json: {\n    email:       buyer.email.toLowerCase().trim(),\n    name:        buyer.name ?? '',\n    transaction: purchase.transaction ?? ''\n  }\n}];"
       },
       "id": "node-iapro-code",
       "name": "Normalizar Comprador IAPRO",
