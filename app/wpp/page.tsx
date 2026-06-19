@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import VideoUpsell from "./VideoUpsell";
 
 export const metadata: Metadata = {
@@ -47,8 +48,21 @@ export default function WppPage() {
         <VideoUpsell />
       </div>
 
+      <Script id="vturb-wpp-delay" strategy="afterInteractive">{`
+        (function() {
+          function initDelay() {
+            var player = document.querySelector("vturb-smartplayer");
+            if (!player) { setTimeout(initDelay, 500); return; }
+            player.addEventListener("player:ready", function() {
+              player.displayHiddenElements(176, [".vturb-delayed"], { persist: true });
+            });
+          }
+          initDelay();
+        })();
+      `}</Script>
+
       {/* Oferta */}
-      <div className="w-full max-w-2xl text-center">
+      <div className="vturb-delayed w-full max-w-2xl text-center" style={{ display: "none" }}>
         <div className="bg-[#121b0c] border border-[#b6d432]/15 rounded-3xl p-8 sm:p-12 mb-6"
           style={{ boxShadow: "0 0 60px -10px rgba(182,212,50,0.2), 0 0 120px -30px rgba(182,212,50,0.08)" }}>
 
