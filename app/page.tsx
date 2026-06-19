@@ -17,6 +17,142 @@ import {
 const CHECKOUT =
   "https://pay.hotmart.com/Y106393670A?off=bxk9fmp2&checkoutMode=10";
 
+function NexiaBox() {
+  const features = [
+    "Prompt → imagem gerada",
+    "Travar produto na cena",
+    "Manter câmera e iluminação",
+    "Gerar variações em lote",
+  ];
+  return (
+    <svg
+      viewBox="0 0 290 415"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-full max-w-[240px] drop-shadow-2xl select-none"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="fg-nexia" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#141f0d" />
+          <stop offset="100%" stopColor="#080c04" />
+        </linearGradient>
+      </defs>
+      {/* shadow */}
+      <ellipse cx="145" cy="403" rx="118" ry="7" fill="rgba(0,0,0,0.55)" />
+      {/* top face */}
+      <path d="M 50,55 L 250,55 L 212,22 L 12,22 Z" fill="#0d1809" stroke="#b6d43218" strokeWidth="0.5" />
+      {/* left spine */}
+      <path d="M 50,55 L 12,22 L 12,322 L 50,355 Z" fill="#090e07" stroke="#b6d43212" strokeWidth="0.5" />
+      <text
+        transform="translate(31,192) rotate(-90)"
+        textAnchor="middle"
+        fontSize="6"
+        fill="#4a4840"
+        fontWeight="700"
+        letterSpacing="2.5"
+        fontFamily="system-ui,sans-serif"
+      >
+        NEX IA IMAGE · DOUG ACADEMY
+      </text>
+      {/* front face */}
+      <rect x="50" y="55" width="200" height="300" fill="url(#fg-nexia)" />
+      <rect x="50" y="55" width="200" height="300" fill="none" stroke="#b6d43222" strokeWidth="0.8" />
+      {/* bottom stripe */}
+      <rect x="50" y="325" width="200" height="30" fill="#b6d432" />
+      {/* wave decoration */}
+      <path d="M 216,60 C 180,100 218,152 180,208 C 142,264 214,308 214,325" stroke="#b6d432" strokeWidth="2.5" fill="none" opacity="0.2" />
+      <path d="M 235,60 C 197,100 237,152 197,208 C 157,264 235,310 235,325" stroke="#b6d432" strokeWidth="1.5" fill="none" opacity="0.1" />
+      {/* badge pill */}
+      <rect x="63" y="73" rx="7" width="86" height="14" fill="none" stroke="#b6d43232" strokeWidth="0.8" />
+      <text x="106" y="83.5" textAnchor="middle" fontSize="6.5" fill="#b6d432" fontWeight="700" letterSpacing="0.8" fontFamily="system-ui">ADDON · BLENDER 4.0+</text>
+      {/* title */}
+      <text x="64" y="134" fontSize="42" fontWeight="900" fill="white" fontFamily="system-ui" letterSpacing="-1">nex</text>
+      <text x="163" y="134" fontSize="42" fontWeight="900" fill="#b6d432" fontFamily="system-ui" letterSpacing="-1">IA</text>
+      <text x="64" y="178" fontSize="42" fontWeight="900" fill="#b6d432" fontFamily="system-ui" letterSpacing="-1">Image</text>
+      {/* divider */}
+      <line x1="64" y1="192" x2="224" y2="192" stroke="#b6d43215" strokeWidth="0.5" />
+      {/* features */}
+      {features.map((f, i) => (
+        <g key={i}>
+          <circle cx="68" cy={210 + i * 19} r="1.7" fill="#b6d432" />
+          <text x="76" y={214.5 + i * 19} fontSize="8.5" fill="#7a7870" fontFamily="system-ui">{f}</text>
+        </g>
+      ))}
+      {/* bottom label */}
+      <text x="150" y="343" textAnchor="middle" fontSize="7.5" fontWeight="700" fill="#080c04" fontFamily="system-ui" letterSpacing="0.5">v2.5.1 · Blender 4.0+ · Doug Academy</text>
+    </svg>
+  );
+}
+
+function BlenderBox() {
+  const features = [
+    "Instalação do Blender (gratuito)",
+    "Painéis e movimentação",
+    "Modo de edição + modelagem",
+    "UV Mapping e iluminação",
+  ];
+  return (
+    <svg
+      viewBox="0 0 290 415"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-full max-w-[240px] drop-shadow-2xl select-none"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="fg-blender" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#141f0d" />
+          <stop offset="100%" stopColor="#080c04" />
+        </linearGradient>
+      </defs>
+      {/* shadow */}
+      <ellipse cx="145" cy="403" rx="118" ry="7" fill="rgba(0,0,0,0.55)" />
+      {/* top face */}
+      <path d="M 50,55 L 250,55 L 212,22 L 12,22 Z" fill="#0d1809" stroke="#b6d43218" strokeWidth="0.5" />
+      {/* left spine */}
+      <path d="M 50,55 L 12,22 L 12,322 L 50,355 Z" fill="#090e07" stroke="#b6d43212" strokeWidth="0.5" />
+      <text
+        transform="translate(31,192) rotate(-90)"
+        textAnchor="middle"
+        fontSize="6"
+        fill="#4a4840"
+        fontWeight="700"
+        letterSpacing="2.5"
+        fontFamily="system-ui,sans-serif"
+      >
+        BLENDER BASICS · DOUG ACADEMY
+      </text>
+      {/* front face */}
+      <rect x="50" y="55" width="200" height="300" fill="url(#fg-blender)" />
+      <rect x="50" y="55" width="200" height="300" fill="none" stroke="#b6d43222" strokeWidth="0.8" />
+      {/* bottom stripe */}
+      <rect x="50" y="325" width="200" height="30" fill="#b6d432" />
+      {/* Blender hexagon icon (orange) */}
+      <polygon points="214,72 228,80 228,96 214,104 200,96 200,80" fill="none" stroke="#F5792A" strokeWidth="1.5" opacity="0.75" />
+      <circle cx="214" cy="88" r="5.5" fill="none" stroke="#F5792A" strokeWidth="1.2" opacity="0.5" />
+      {/* wave decoration */}
+      <path d="M 185,60 C 150,100 188,152 150,208 C 112,264 184,308 184,325" stroke="#b6d432" strokeWidth="2.5" fill="none" opacity="0.18" />
+      <path d="M 204,60 C 167,100 206,152 167,208 C 128,264 203,310 203,325" stroke="#b6d432" strokeWidth="1.5" fill="none" opacity="0.09" />
+      {/* badge pill */}
+      <rect x="63" y="73" rx="7" width="96" height="14" fill="none" stroke="#b6d43232" strokeWidth="0.8" />
+      <text x="111" y="83.5" textAnchor="middle" fontSize="6.5" fill="#b6d432" fontWeight="700" letterSpacing="0.8" fontFamily="system-ui">FUNDAMENTOS · DO ZERO</text>
+      {/* title */}
+      <text x="64" y="138" fontSize="38" fontWeight="900" fill="white" fontFamily="system-ui" letterSpacing="-1">Blender</text>
+      <text x="64" y="180" fontSize="38" fontWeight="900" fill="#b6d432" fontFamily="system-ui" letterSpacing="-1">Basics</text>
+      {/* divider */}
+      <line x1="64" y1="194" x2="224" y2="194" stroke="#b6d43215" strokeWidth="0.5" />
+      {/* features */}
+      {features.map((f, i) => (
+        <g key={i}>
+          <circle cx="68" cy={212 + i * 19} r="1.7" fill="#b6d432" />
+          <text x="76" y={216.5 + i * 19} fontSize="8.5" fill="#7a7870" fontFamily="system-ui">{f}</text>
+        </g>
+      ))}
+      {/* bottom label */}
+      <text x="150" y="343" textAnchor="middle" fontSize="7.5" fontWeight="700" fill="#080c04" fontFamily="system-ui" letterSpacing="0.5">De R$ 197 → Incluído · Doug Academy</text>
+    </svg>
+  );
+}
+
 function AddonBox() {
   const features = [
     "Prompt em texto → imagem gerada",
@@ -275,35 +411,13 @@ export default function Home() {
   return (
     <>
       <main className="bg-background text-foreground overflow-x-hidden">
-        {/* NAV */}
-        <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/80 border-b border-lime/10">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-dimmer text-xs tracking-widest uppercase hidden sm:inline">
-                {"{FORMAÇÃO}"}
-              </span>
-              <span className="font-display font-black text-xl text-foreground">
-                IAPRO<span className="text-lime">.</span>BLEND
-              </span>
-            </div>
-            <a
-              href={CHECKOUT}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-2 bg-lime text-background font-black text-sm uppercase tracking-wide px-5 py-2.5 rounded-xl hover:bg-lime-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime"
-            >
-              Quero entrar — R$ 47
-            </a>
-          </div>
-        </nav>
-
         {/* HERO */}
         <section className="relative overflow-hidden">
 
           {/* ── MOBILE ONLY: full-bleed product image at top ── */}
           <motion.div
-            className="lg:hidden relative w-full mt-16"
-            style={{ height: "clamp(260px, 85vw, 460px)" }}
+            className="lg:hidden relative w-full"
+            style={{ height: "clamp(260px, 90vw, 520px)" }}
             initial={{ opacity: 0, scale: 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -315,8 +429,6 @@ export default function Home() {
               className="object-cover object-center"
               priority
             />
-            {/* top fade: nav stays legible */}
-            <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background via-background/60 to-transparent" />
             {/* bottom fade: blends into dark bg */}
             <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-background to-transparent" />
             {/* badge */}
@@ -351,7 +463,7 @@ export default function Home() {
           </div>
 
           {/* ── CONTENT ── */}
-          <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pb-12 lg:min-h-screen lg:flex lg:items-center lg:pt-28 lg:pb-20">
+          <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pb-12 lg:min-h-screen lg:flex lg:items-center lg:pt-16 lg:pb-20">
             <div className="w-full grid lg:grid-cols-[1fr_460px] gap-6 lg:gap-14 items-center">
 
               {/* LEFT: copy */}
@@ -385,27 +497,6 @@ export default function Home() {
                 </FadeIn>
 
                 <FadeIn delay={0.19}>
-                  <a
-                    href={CHECKOUT}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex sm:inline-flex items-center justify-center gap-3 bg-lime text-background font-black uppercase tracking-wide rounded-xl px-8 py-5 text-xl transition-all duration-200 hover:bg-lime-dark hover:scale-[1.02] active:scale-95 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-lime/40 mb-5"
-                  >
-                    Sim, quero aprender agora →
-                  </a>
-                </FadeIn>
-
-                <FadeIn delay={0.24}>
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="text-foreground font-black text-3xl tabular-nums">R$ 47</span>
-                    <span className="text-dimmer text-sm">·</span>
-                    <span className="text-muted text-sm">acesso vitalício</span>
-                    <span className="text-dimmer text-sm">·</span>
-                    <span className="text-muted text-sm">3x de R$ 16,91</span>
-                  </div>
-                </FadeIn>
-
-                <FadeIn delay={0.28}>
                   <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-muted mb-8 sm:flex sm:flex-wrap sm:gap-x-6">
                     {[
                       "Acesso vitalício",
@@ -731,7 +822,7 @@ export default function Home() {
             {/* Box + panel layout */}
             <div className="grid md:grid-cols-2 gap-14 items-center mb-16">
               <FadeIn className="flex justify-center md:justify-end">
-                <AddonBox />
+                <NexiaBox />
               </FadeIn>
               <FadeIn delay={0.1}>
                 <div>
@@ -836,14 +927,8 @@ export default function Home() {
                 </div>
 
                 {/* Visual aside */}
-                <div className="relative z-10 hidden md:flex flex-col items-center justify-center gap-3 min-w-[160px]">
-                  <div className="w-24 h-24 rounded-2xl bg-lime/10 border border-lime/20 flex items-center justify-center mb-2">
-                    <Layers className="w-10 h-10 text-lime" aria-hidden="true" />
-                  </div>
-                  <span className="text-center text-xs font-black uppercase tracking-widest text-dimmer">
-                    Blender<br />Basics
-                  </span>
-                  <span className="text-lime font-black text-lg">Grátis</span>
+                <div className="relative z-10 hidden md:flex flex-col items-center justify-center min-w-[200px]">
+                  <BlenderBox />
                 </div>
               </div>
             </FadeIn>
