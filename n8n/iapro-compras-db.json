@@ -1,0 +1,60 @@
+{
+  "name": "IAPRO Compras → Registrar no Banco",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "iapro-compra",
+        "responseMode": "immediately"
+      },
+      "id": "node-iapro-wh",
+      "name": "Webhook IAPRO",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "iapro-compra-webhook-id"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body ?? $input.first().json;\n\n// Só processa PURCHASE_COMPLETE do produto IAPRO.BLEND (ID 6813981)\nif (body.event !== 'PURCHASE_COMPLETE') return [];\n\nconst buyer    = body.data?.buyer    ?? {};\nconst purchase = body.data?.purchase ?? {};\n\nif (Number(purchase?.product?.id) !== 6813981) return [];\nif (!buyer.email) return [];\n\nreturn [{\n  json: {\n    email:       buyer.email.toLowerCase().trim(),\n    name:        buyer.name ?? '',\n    transaction: purchase.transaction ?? ''\n  }\n}];"
+      },
+      "id": "node-iapro-code",
+      "name": "Normalizar Comprador IAPRO",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO iapro_buyers (email, name, transaction)\nVALUES ('{{ $json.email }}', '{{ $json.name }}', '{{ $json.transaction }}')\nON CONFLICT (email) DO NOTHING;",
+        "options": {}
+      },
+      "id": "node-iapro-pg",
+      "name": "Salvar no Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [680, 300],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook IAPRO": {
+      "main": [[{"node": "Normalizar Comprador IAPRO", "type": "main", "index": 0}]]
+    },
+    "Normalizar Comprador IAPRO": {
+      "main": [[{"node": "Salvar no Postgres", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {"executionOrder": "v1"},
+  "versionId": "iapro-db-v1",
+  "meta": {"templateCredsSetupCompleted": false},
+  "id": "iapro-compras-db",
+  "tags": []
+}
