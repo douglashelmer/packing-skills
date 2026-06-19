@@ -519,7 +519,7 @@ export default function Home() {
                       href="#oferta"
                       className="inline-flex items-center gap-3 bg-lime text-background font-black text-base sm:text-lg px-8 py-4 rounded-full hover:brightness-110 active:scale-[0.97] transition-all duration-150"
                     >
-                      Quero aprender agora — R$ 47
+                      Quero aprender agora
                       <span aria-hidden="true">→</span>
                     </a>
                   </div>
