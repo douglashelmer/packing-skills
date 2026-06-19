@@ -822,7 +822,13 @@ export default function Home() {
             {/* Box + panel layout */}
             <div className="grid md:grid-cols-2 gap-14 items-center mb-16">
               <FadeIn className="flex justify-center md:justify-end">
-                <NexiaBox />
+                <Image
+                  src="/bonus1.webp"
+                  alt="Addon nexIA Image"
+                  width={480}
+                  height={480}
+                  className="w-full max-w-[420px] drop-shadow-2xl select-none rounded-xl"
+                />
               </FadeIn>
               <FadeIn delay={0.1}>
                 <div>
@@ -927,8 +933,14 @@ export default function Home() {
                 </div>
 
                 {/* Visual aside */}
-                <div className="relative z-10 hidden md:flex flex-col items-center justify-center min-w-[200px]">
-                  <BlenderBox />
+                <div className="relative z-10 hidden md:flex flex-col items-center justify-center min-w-[260px]">
+                  <Image
+                    src="/bonus2.webp"
+                    alt="Curso Blender Basics"
+                    width={420}
+                    height={420}
+                    className="w-full max-w-[380px] drop-shadow-2xl select-none rounded-xl"
+                  />
                 </div>
               </div>
             </FadeIn>
