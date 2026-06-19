@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+const CHECKOUT = "https://pay.hotmart.com/E103412064T?off=wgg5xk6w&checkoutMode=10";
+
 export default function WppPage() {
   return (
     <main className="min-h-screen bg-[#080c04] text-[#e8e4d4] flex flex-col items-center px-4 py-10 sm:py-16">
@@ -46,25 +48,7 @@ export default function WppPage() {
         <VideoUpsell />
       </div>
 
-      {/* Hotmart Sales Funnel SDK */}
-      <Script
-        src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"
-        strategy="afterInteractive"
-      />
-      <Script id="hotmart-funnel-init-wpp" strategy="afterInteractive">{`
-        (function() {
-          function mount() {
-            if (window.checkoutElements) {
-              checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel-wpp');
-            } else {
-              setTimeout(mount, 200);
-            }
-          }
-          mount();
-        })();
-      `}</Script>
-
-      {/* Sincronizar exibição com o vídeo: aparece em 2:56 (176s) */}
+      {/* Sincronizar botão com o vídeo: aparece em 2:56 (176s) */}
       <Script id="vturb-wpp-delay" strategy="afterInteractive">{`
         (function() {
           function initDelay() {
@@ -78,9 +62,51 @@ export default function WppPage() {
         })();
       `}</Script>
 
-      {/* Widget aparece no 2:56 */}
-      <div className="vturb-delayed w-full max-w-2xl" style={{ display: "none" }}>
-        <div id="hotmart-sales-funnel-wpp" className="w-full" />
+      {/* Oferta aparece no 2:56 */}
+      <div className="vturb-delayed w-full max-w-2xl text-center" style={{ display: "none" }}>
+        <div
+          className="bg-[#121b0c] border border-[#b6d432]/15 rounded-3xl p-8 sm:p-12 mb-6"
+          style={{ boxShadow: "0 0 60px -10px rgba(182,212,50,0.2), 0 0 120px -30px rgba(182,212,50,0.08)" }}
+        >
+          <p className="text-[#9a9680] text-sm uppercase tracking-widest font-bold mb-2">
+            Oferta exclusiva — só nessa página
+          </p>
+
+          <h2 className="font-sans font-black text-2xl sm:text-3xl md:text-4xl mb-2 leading-tight">
+            Formação <span className="text-[#b6d432]">IAPRO.BLEND</span> completa
+          </h2>
+
+          <p className="text-[#9a9680] text-base mb-8 max-w-lg mx-auto">
+            O sistema completo de 3D + IA para criar projetos de R$600 a R$2.100
+            — sem estúdio, sem experiência prévia.
+          </p>
+
+          <div className="flex items-baseline justify-center gap-3 mb-8">
+            <span className="text-[#5a5750] text-lg line-through">R$ 897</span>
+            <div className="flex items-start">
+              <span className="text-[#b6d432] font-black text-2xl leading-none mt-1">R$</span>
+              <span className="text-[#b6d432] font-black text-7xl sm:text-8xl leading-none tabular-nums">297</span>
+            </div>
+          </div>
+
+          <a
+            href={CHECKOUT}
+            className="inline-flex items-center gap-3 bg-[#b6d432] text-[#080c04] font-black text-lg sm:text-xl px-10 py-5 rounded-full hover:brightness-110 active:scale-[0.97] transition-all duration-150 mb-4"
+          >
+            Sim, quero a formação completa →
+          </a>
+
+          <p className="text-[#5a5750] text-sm">
+            Pagamento único · Acesso vitalício · Garantia de 7 dias
+          </p>
+        </div>
+
+        <a
+          href="https://packing-skills.pages.dev"
+          className="text-[#5a5750] text-sm hover:text-[#9a9680] transition-colors underline underline-offset-4"
+        >
+          Não, obrigado — quero só o Packing Skills
+        </a>
       </div>
 
     </main>
