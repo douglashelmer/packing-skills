@@ -14,10 +14,9 @@ import {
   ChevronDown,
 } from "lucide-react";
 
-// TODO: trocar pelo link de checkout da oferta em DÓLAR (US$ 9).
-// O link abaixo é o da oferta em BRL e está aqui apenas como placeholder.
+// Oferta em DÓLAR (US$ 9).
 const CHECKOUT =
-  "https://pay.hotmart.com/Y106393670A?off=bxk9fmp2&checkoutMode=10";
+  "https://pay.hotmart.com/Y106393670A?off=83jn50xg&checkoutMode=10";
 
 function NexiaBox() {
   const features = [
