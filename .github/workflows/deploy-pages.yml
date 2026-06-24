@@ -41,6 +41,10 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          # Ativa o GitHub Pages via API (Source: GitHub Actions) sem
+          # precisar mexer manualmente em Settings → Pages.
+          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
