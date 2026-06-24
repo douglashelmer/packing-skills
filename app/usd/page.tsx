@@ -14,8 +14,9 @@ import {
   ChevronDown,
 } from "lucide-react";
 
+// Oferta em DÓLAR (US$ 9).
 const CHECKOUT =
-  "https://pay.hotmart.com/Y106393670A?off=bxk9fmp2&checkoutMode=10";
+  "https://pay.hotmart.com/Y106393670A?off=83jn50xg&checkoutMode=10";
 
 function NexiaBox() {
   const features = [
@@ -148,7 +149,7 @@ function BlenderBox() {
         </g>
       ))}
       {/* bottom label */}
-      <text x="150" y="343" textAnchor="middle" fontSize="7.5" fontWeight="700" fill="#080c04" fontFamily="system-ui" letterSpacing="0.5">De R$ 197 → Incluído · Doug Academy</text>
+      <text x="150" y="343" textAnchor="middle" fontSize="7.5" fontWeight="700" fill="#080c04" fontFamily="system-ui" letterSpacing="0.5">De $39 → Incluído · Doug Academy</text>
     </svg>
   );
 }
@@ -400,8 +401,8 @@ const faqs = [
     a: "Pode. O processo é o mesmo para qualquer frasco ou embalagem. O serum é o projeto-modelo — você aplica em qualquer produto que tiver.",
   },
   {
-    q: "Posso parcelar?",
-    a: "Pode. Em até 3x de R$ 16,91 no cartão.",
+    q: "Como funciona o pagamento em dólar?",
+    a: "O pagamento é à vista, em dólar (US$ 9), no cartão internacional. Acesso liberado na hora.",
   },
 ];
 
@@ -610,7 +611,7 @@ export default function Home() {
                 <span className="text-lime text-base leading-none">✦</span>
                 Resultado Profissional
                 <span className="text-lime text-base leading-none">✦</span>
-                R$ 47
+                $9
                 <span className="text-lime text-base leading-none">✦</span>
                 Acesso Vitalício
                 <span className="text-lime text-base leading-none">✦</span>
@@ -633,7 +634,7 @@ export default function Home() {
 
             <div className="space-y-7">
               {[
-                "Fotógrafo de produto custa R$ 500, R$ 800, R$ 1.200 por sessão — e você não fica com o arquivo 3D pra testar variação de cor, de rótulo, de cena.",
+                "Fotógrafo de produto custa $100, $200, $300 por sessão — e você não fica com o arquivo 3D pra testar variação de cor, de rótulo, de cena.",
                 "O Canva e o Photoshop chegaram no limite. Fundo branco ficou ultrapassado.",
                 "Você já viu aquelas imagens flutuando, com água, com textura, com luz perfeita — e não faz ideia de como foram feitas.",
               ].map((text, i) => (
@@ -936,8 +937,8 @@ export default function Home() {
                   </ul>
                   <div className="flex items-center gap-4 flex-wrap">
                     <div>
-                      <span className="text-dimmer text-sm line-through mr-2">R$ 197</span>
-                      <span className="text-lime font-black text-2xl">R$ 0</span>
+                      <span className="text-dimmer text-sm line-through mr-2">$39</span>
+                      <span className="text-lime font-black text-2xl">$0</span>
                       <span className="text-muted text-sm ml-1">— incluso no Packing Skills</span>
                     </div>
                   </div>
@@ -974,7 +975,7 @@ export default function Home() {
                 <span className="text-lime text-base leading-none">✦</span>
                 Iluminação
                 <span className="text-lime text-base leading-none">✦</span>
-                De R$ 197 por R$ 0
+                De $39 por $0
                 <span className="text-lime text-base leading-none">✦</span>
               </span>
             ))}
@@ -1077,12 +1078,12 @@ export default function Home() {
             <FadeIn>
               <div className="text-center mb-10">
                 <p className="text-muted text-lg mb-2">
-                  Sessão com fotógrafo: R$ 500–1.500.&nbsp;&nbsp;Template 3D no
-                  marketplace: R$ 150–300.
+                  Sessão com fotógrafo: $100–300.&nbsp;&nbsp;Template 3D no
+                  marketplace: $30–60.
                 </p>
                 <p className="text-foreground text-xl font-bold">
                   Aqui você aprende a fazer qualquer frasco, com qualquer
-                  rótulo, infinitas vezes — por R$ 47.
+                  rótulo, infinitas vezes — por $9.
                 </p>
               </div>
             </FadeIn>
@@ -1094,20 +1095,20 @@ export default function Home() {
                     🔥 Oferta de Lançamento
                   </span>
                   <div className="font-display font-black text-8xl sm:text-9xl text-lime leading-none tabular-nums mb-2">
-                    R$47
+                    $9
                   </div>
                   <p className="text-muted text-base">
-                    ou 3x de{" "}
-                    <span className="text-foreground font-bold">R$ 16,91</span>{" "}
-                    no cartão
+                    pagamento único —{" "}
+                    <span className="text-foreground font-bold">em dólar</span>,
+                    no cartão internacional
                   </p>
                 </div>
 
                 <ul className="space-y-4 mb-10">
                   {[
                     "Módulo completo — Packing Skills (6 módulos)",
-                    "🎁 Bônus #1: Addon nexIA Image (De R$ 97, por R$ 0)",
-                    "🎁 Bônus #2: Curso Blender Basics (De R$ 197, por R$ 0)",
+                    "🎁 Bônus #1: Addon nexIA Image (De $19, por $0)",
+                    "🎁 Bônus #2: Curso Blender Basics (De $39, por $0)",
                     "Arquivo do projeto .blend para referência",
                     "Acesso vitalício, sem mensalidade",
                     "Garantia total de 7 dias — sem perguntas",
@@ -1146,7 +1147,7 @@ export default function Home() {
               </h2>
               <p className="text-muted text-xl leading-relaxed">
                 Você assiste ao curso, aplica o projeto, e se até o 7º dia
-                achar que não valeu os R$ 47 — me manda um e-mail e devolvo
+                achar que não valeu os $9 — me manda um e-mail e devolvo
                 tudo.{" "}
                 <span className="text-foreground font-bold">
                   Sem formulário. Sem ligação. Sem perguntas.
@@ -1194,7 +1195,7 @@ export default function Home() {
               </h2>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <Btn href={CHECKOUT}>Quero aprender agora — R$ 47 →</Btn>
+              <Btn href={CHECKOUT}>Quero aprender agora — $9 →</Btn>
             </FadeIn>
             <FadeIn delay={0.15}>
               <p className="text-dimmer text-sm mt-5">
@@ -1204,7 +1205,7 @@ export default function Home() {
             <FadeIn delay={0.22}>
               <p className="text-muted text-base mt-14 max-w-xl mx-auto italic border-t border-white/5 pt-10">
                 P.S. — A diferença entre o produto que para o feed e o que passa
-                despercebido raramente é o produto em si. É a imagem. Por R$ 47
+                despercebido raramente é o produto em si. É a imagem. Por $9
                 você aprende a fazer a sua.
               </p>
             </FadeIn>
